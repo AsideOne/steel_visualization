@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Steel Price Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div id="chart" style="width: 600px; height:400px;"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('chart'));
+        var data = {{ data|safe }};
+        var dates = data.map(item => new Date(item.date));
+        var prices = data.map(item => item.price);
+
+        var option = {
+            title: {
+                text: 'Steel Price Trends'
+            },
+            xAxis: {
+                type: 'category',
+                data: dates
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: prices,
+                type: 'line'
+            }]
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
