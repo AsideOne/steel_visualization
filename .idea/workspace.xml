@@ -4,35 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ac44de-247e-4514-9787-698717c1f9cf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ scrapy_steel_price/ scrapy_steel_price/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ scrapy_steel_price/ scrapy_steel_price/items.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ scrapy_steel_price/ scrapy_steel_price/middlewares.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ scrapy_steel_price/ scrapy_steel_price/pipelines.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ scrapy_steel_price/ scrapy_steel_price/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ scrapy_steel_price/ scrapy_steel_price/spiders/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ scrapy_steel_price/ scrapy_steel_price/spiders/steel_price_spider.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ scrapy_steel_price/scrapy.cfg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/MarsCodeWorkspaceAppSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/steel_price_visualization_project.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_processing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_storage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flaskApp/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flaskApp/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flaskApp/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flaskApp/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flaskApp/routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flaskApp/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instance/steel_price.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/steel_price.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/text.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visualization.py" afterDir="false" />
+    <list default="true" id="b4ac44de-247e-4514-9787-698717c1f9cf" name="Changes" comment="第一次更新">
+      <change beforePath="$PROJECT_DIR$/ scrapy_steel_price/ scrapy_steel_price/spiders/steel_price_spider.py" beforeDir="false" afterPath="$PROJECT_DIR$/ scrapy_steel_price/ scrapy_steel_price/spiders/steel_price_spider.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskApp/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskApp/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskApp/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskApp/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskApp/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskApp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskApp/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskApp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskApp/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/steel_price.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/steel_price.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,9 +30,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2rbqEPGpU2etMRGDrjFMdzJv2Kn" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -68,6 +49,7 @@
     "Python.app (2).executor": "Run",
     "Python.app.executor": "Run",
     "Python.data_storage.executor": "Run",
+    "Python.models.executor": "Run",
     "Python.routes.executor": "Run",
     "Python.steel_price_spider.executor": "Run",
     "Python.text.executor": "Run",
@@ -97,28 +79,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/flaskApp/__init__.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="app (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="steel_price_visualization_project" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -158,11 +118,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="D:\LenovoSoftstore\develop\steel_price_visualization_project\steel_price_visualization_project\app.py" />
+      <option name="SCRIPT_NAME" value="D:\LenovoSoftstore\develop\steel_price_visualization_project\steel_price_visualization_project\app\app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -171,7 +131,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="steel_price_visualization_project" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -180,11 +140,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/flaskApp" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="D:\LenovoSoftstore\develop\steel_price_visualization_project\steel_price_visualization_project\app\app.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/flaskApp/models.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -240,10 +200,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.app (2)" />
+        <item itemvalue="Python.models" />
+        <item itemvalue="Python.__init__" />
         <item itemvalue="Python.steel_price_spider" />
         <item itemvalue="Python.text" />
-        <item itemvalue="Python.__init__" />
-        <item itemvalue="Python.app (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -263,9 +223,31 @@
       <option name="presentableId" value="Default" />
       <updated>1736838011036</updated>
     </task>
+    <task id="LOCAL-00001" summary="第一次更新">
+      <option name="closed" value="true" />
+      <created>1736931671032</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1736931671032</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="第一次更新" />
+    <option name="LAST_COMMIT_MESSAGE" value="第一次更新" />
   </component>
 </project>

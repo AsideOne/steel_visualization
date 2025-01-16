@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Steel Price Visualization</title>
+    <title>废钢价格信息</title>
+    <!-- 引入 ECharts 库 -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
 </head>
-<body>
-    <div id="chart" style="width: 600px; height:400px;"></div>
-    <script>
-        var myChart = echarts.init(document.getElementById('chart'));
-        var data = {{ data|safe }};
-        var dates = data.map(item => new Date(item.date));
-        var prices = data.map(item => item.price);
 
+<body>
+    <h1>废钢价格信息</h1>
+    <!-- 为 ECharts 准备一个 DOM 容器 -->
+    <div id="steel-price-chart" style="width: 800px; height: 400px;"></div>
+
+    <script type="text/javascript">
+        // 基于准备好的 DOM，初始化 echarts 实例
+        var myChart = echarts.init(document.getElementById('steel-price-chart'));
+
+        // 指定图表的配置项和数据
         var option = {
             title: {
-                text: 'Steel Price Trends'
+                text: '废钢价格柱状图'
             },
+            tooltip: {},
             xAxis: {
-                type: 'category',
-                data: dates
+                data: [
+                    {% for name in steel_names %}
+                    "{{ name }}",
+                    {% endfor %}
+                ]
             },
-            yAxis: {
-                type: 'value'
-            },
+            yAxis: {},
             series: [{
-                data: prices,
-                type: 'line'
+                name: '价格',
+                type: 'bar',
+                data: [
+                    {% for price in steel_prices %}
+                    "{{ price }}",
+                    {% endfor %}
+                ]
             }]
         };
 
+        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     </script>
 </body>
+
 </html>
