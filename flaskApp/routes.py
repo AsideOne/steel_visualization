@@ -20,6 +20,7 @@ def index():
     steel_names = [steel.name for steel in data]
     # 提取每个 SteelPrice 记录的价格，存储在 steel_prices 列表中
     steel_prices = [steel.price for steel in data]
+    print('index页面查询数据')
     # 使用 render_template 函数渲染 index.html 模板，并将 steel_names 和 steel_prices 作为变量传递给模板
     return render_template('index.html', steel_names=steel_names, steel_prices=steel_prices)
 

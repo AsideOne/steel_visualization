@@ -21,6 +21,7 @@ def scrape_steel_price():
             steel_price = SteelPrice(name=name, price=price)
             db.session.add(steel_price)
         # 提交会话以保存数据到数据库
+        print("spider插入成功")
         db.session.commit()
 
         # 查询并展示数据用于测试

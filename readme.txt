@@ -4,6 +4,9 @@ BeautifulSoup 是 Python 中一个用于解析 HTML 和 XML 文档的库，它�
 flask_sqlalchemy 是一个 Flask 扩展，它简化了在 Flask 应用中使用 SQLAlchemy 的过程，使得在 Python 中操作关系型数据库变得更加方便和高效。
 APScheduler 可以避免阻塞主线程，更适合在生产环境中使用。
 
+SQLite 项目中使用的数据库为SQLliteSQLite 不需要像 MySQL、Oracle 等传统数据库那样启动一个单独的数据库服务器进程。
+它直接读写磁盘上的数据库文件，这使得它的使用非常方便，尤其是在一些小型应用或者嵌入式设备中。例如，在一个 Python 脚本中使用 SQLite，
+只需要导入sqlite3模块就可以直接操作数据库，无需额外的配置和管理数据库服务器。
 
 
 

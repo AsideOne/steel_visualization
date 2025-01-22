@@ -6,10 +6,11 @@ app = Flask(__name__)
 db = SQLAlchemy()
 
 class Config:
-    # SQLAlchemy 中用于指定数据库连接字符串的配置项。在这个例子中，'sqlite:///steel.db' 表示使用 SQLite 数据库，并且数据库文件名为 steel.db
-    SQLALCHEMY_DATABASE_URI ='sqlite:///steel.db'
-
-    # 当设置为 False 时，可以避免 SQLAlchemy 发出有关对象修改的信号，减少性能开销和不必要的警告信息。
+    # 获取 flaskApp 下的 instance 目录的绝对路径
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    instance_path = os.path.join(base_dir, 'instance', 'steel.db')
+    print(instance_path)
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{instance_path}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod

@@ -7,21 +7,24 @@ from data_storage import DatabaseManager
 from apscheduler.schedulers.background import BackgroundScheduler
 import subprocess
 
-app = Flask(__name__)
+visualization = Flask(__name__)
 # 从 Config 类中加载应用程序的配置信息到 app 中，如数据库 URI、调试模式等
-app.config.from_object(Config)
+visualization.config.from_object(Config)
 # 使用 db 对象的 init_app 方法将数据库操作和 Flask 应用程序关联起来
-db.init_app(app)
+db.init_app(visualization)
 
 
 # 初始化 DatabaseManager 类
-database_manager = DatabaseManager(app)
+database_manager = DatabaseManager(visualization)
 
-@app.route('/')
+@visualization.route('/')
 def index():
     print('featch_data_for_visualization')
     data = fetch_data_for_visualization()
     print('visuallyzation返回数据')
+    all_steel_prices = database_manager.fetch_all_data()
+    for steel in all_steel_prices:
+        print(f"名称: {steel.name}, 价格:{steel.price}")
     return render_template('index.html', data=json.dumps(data))
 
 from flaskApp.models import SteelPrice
@@ -41,7 +44,9 @@ scheduler.start()
 # 确保代码仅在作为主程序运行时执行，而不是作为模块被导入时执行
 if __name__ == '__main__':
     # 创建数据库
-    with app.app_context():
+    with visualization.app_context():
         database_manager.create_database()  # 使用 DatabaseManager 类创建数据库
     # 运行 Flask 应用程序，并开启调试模式，在调试模式下，服务器会自动重新加载代码，并且会显示详细的错误信息
-    app.run(debug=True)
+    visualization.run(debug=True)
+
+
