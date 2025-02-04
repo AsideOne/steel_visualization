@@ -13,16 +13,16 @@ def api_data():
     return jsonify(data_list)
 
 
-def index():
-    # 从数据库中查询所有的 SteelPrice 记录
-    data = SteelPrice.query.all()
-    # 提取每个 SteelPrice 记录的名称，存储在 steel_names 列表中
-    steel_names = [steel.name for steel in data]
-    # 提取每个 SteelPrice 记录的价格，存储在 steel_prices 列表中
-    steel_prices = [steel.price for steel in data]
-    print('index页面查询数据')
-    # 使用 render_template 函数渲染 index.html 模板，并将 steel_names 和 steel_prices 作为变量传递给模板
-    return render_template('index.html', steel_names=steel_names, steel_prices=steel_prices)
+# def index():
+#     # 从数据库中查询所有的 SteelPrice 记录
+#     data = SteelPrice.query.all()
+#     # 提取每个 SteelPrice 记录的名称，存储在 steel_names 列表中
+#     steel_names = [steel.name for steel in data]
+#     # 提取每个 SteelPrice 记录的价格，存储在 steel_prices 列表中
+#     steel_prices = [steel.price for steel in data]
+#     print('index页面查询数据')
+#     # 使用 render_template 函数渲染 index.html 模板，并将 steel_names 和 steel_prices 作为变量传递给模板
+#     return render_template('index.html', steel_names=steel_names, steel_prices=steel_prices)
 
 
 # @app.route('/')

@@ -22,7 +22,12 @@
             title: {
                 text: '废钢价格柱状图'
             },
-            tooltip: {},
+            tooltip: {
+                formatter: function (params) {
+                    // 在 tooltip 中显示日期
+                    return '名称: ' + params.name + '<br>价格: ' + params.value + '<br>日期: ' + params.data.date;
+                }
+            },
             xAxis: {
                 data: [
                     {% for name in steel_names %}
@@ -35,8 +40,8 @@
                 name: '价格',
                 type: 'bar',
                 data: [
-                    {% for price in steel_prices %}
-                    "{{ price }}",
+                    {% for i in range(steel_prices|length) %}
+                    { value: {{ steel_prices[i] }}, date: "{{ steel_dates[i] }}" },
                     {% endfor %}
                 ]
             }]

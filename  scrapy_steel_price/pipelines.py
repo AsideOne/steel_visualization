@@ -1,6 +1,7 @@
 from scrapy.exceptions import DropItem
 from flaskApp.models import db, SteelPrice
 from flaskApp import app
+from datetime import datetime
 
 class SteelPricePipeline:
     def open_spider(self, spider):
@@ -16,9 +17,13 @@ class SteelPricePipeline:
             raise DropItem("Missing data in %s" % item)
         try:
             with app.app_context():
-                # 创建 SteelPrice 实例并添加到数据库会话中
-                steel_price = SteelPrice(name=item['name'], price=item['price'])
-                db.session.add(steel_price)
+                today = datetime.now().date()  # 获取当前日期
+                # 检查数据库中是否已经存在当天的相同数据
+                existing_data = SteelPrice.query.filter_by(name=item['name'], date=today).first()
+                if not existing_data:
+                    # 创建 SteelPrice 实例并添加到数据库会话中
+                    steel_price = SteelPrice(name=item['name'], price=item['price'], date=today)
+                    db.session.add(steel_price)
                 # 提交会话以保存数据到数据库
                 db.session.commit()
         except Exception as e:

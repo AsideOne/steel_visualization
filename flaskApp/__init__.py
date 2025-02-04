@@ -19,6 +19,6 @@ def create_app():
     # 返回创建和配置好的 Flask 应用实例
     return app
 
-
 # 创建并配置应用
 app = create_app()
+

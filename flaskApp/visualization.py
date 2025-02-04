@@ -17,21 +17,23 @@ db.init_app(visualization)
 # 初始化 DatabaseManager 类
 database_manager = DatabaseManager(visualization)
 
+# steel_price/flaskApp/visualization.py
 @visualization.route('/')
 def index():
     print('featch_data_for_visualization')
     data = fetch_data_for_visualization()
     print('visuallyzation返回数据')
     all_steel_prices = database_manager.fetch_all_data()
-    for steel in all_steel_prices:
-        print(f"名称: {steel.name}, 价格:{steel.price}")
-    return render_template('index.html', data=json.dumps(data))
-
+    steel_names = [steel.name for steel in all_steel_prices]
+    steel_prices = [steel.price for steel in all_steel_prices]
+    # 获取日期数据
+    steel_dates = [str(steel.date) for steel in all_steel_prices]
+    return render_template('index.html', steel_names=steel_names, steel_prices=steel_prices, steel_dates=steel_dates)
 from flaskApp.models import SteelPrice
 
 def fetch_data_for_visualization():
     data = SteelPrice.query.with_entities(SteelPrice.date, SteelPrice.price).all()
-    result = [{'date': item.date, 'price': item.price} for item in data]
+    result = [{'date': str(item.date), 'price': item.price} for item in data]
     return result
 
 def run_scrapy_spider():
