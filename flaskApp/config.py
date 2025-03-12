@@ -6,11 +6,12 @@ app = Flask(__name__)
 db = SQLAlchemy()
 
 class Config:
-    # 获取 flaskApp 下的 instance 目录的绝对路径
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    instance_path = os.path.join(base_dir, 'instance', 'steel.db')
-    print(instance_path)
-    SQLALCHEMY_DATABASE_URI = f'sqlite:///{instance_path}'
+    # MySQL 数据库连接配置
+    DB_USER = 'root'
+    DB_PASSWORD = 'administrator'
+    DB_HOST = 'localhost'
+    DB_NAME = 'steel_price_db'
+    SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
