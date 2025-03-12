@@ -3,7 +3,7 @@ import sqlite3
 import json
 from flaskApp.config import Config
 from flaskApp.models import db
-from data_storage import DatabaseManager
+from data import DatabaseManager
 from apscheduler.schedulers.background import BackgroundScheduler
 import subprocess
 
