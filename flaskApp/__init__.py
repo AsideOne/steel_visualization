@@ -15,7 +15,7 @@ def create_app():
     # 将 SQLAlchemy 实例 db 与 Flask 应用 app 进行初始化，以便使用数据库操作功能
     db.init_app(app)
     # 导入 flaskApp 模块中的 routes 子模块，其中可能包含应用的路由定义
-    from flaskApp import routes
+    from flaskApp.routes import api_data, index1
     # 返回创建和配置好的 Flask 应用实例
     return app
 

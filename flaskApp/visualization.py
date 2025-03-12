@@ -7,7 +7,7 @@ from data_storage import DatabaseManager
 from apscheduler.schedulers.background import BackgroundScheduler
 import subprocess
 
-visualization = Flask(__name__)
+visualization = Flask(__name__, static_folder='templates')
 # 从 Config 类中加载应用程序的配置信息到 app 中，如数据库 URI、调试模式等
 visualization.config.from_object(Config)
 # 使用 db 对象的 init_app 方法将数据库操作和 Flask 应用程序关联起来
