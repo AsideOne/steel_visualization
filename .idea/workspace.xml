@@ -61,7 +61,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "D:/develop/PycharmProjects/steel_price/data",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "vcs.Git"
   },
   "keyToStringList": {
     "GitStage.ChangesTree.GroupingKeys": [
@@ -71,23 +71,6 @@
     ]
   }
 }]]></component>
-  <component name="QodanaHighlightedReportService">
-    <option name="localRunNotPublishedPersistedInfo">
-      <LocalReportPersistedInfo>
-        <option name="path" value="C:\Users\Administrator\AppData\Local\Temp\qodana_output\qodana.sarif.json" />
-        <option name="reportGuid" value="66bb0b1c-a364-453e-9723-38ce9309d041" />
-        <option name="reportName" value="steel_price/qodana/2025-03-12" />
-      </LocalReportPersistedInfo>
-    </option>
-  </component>
-  <component name="QodanaIsSelectedPersistenceService">
-    <option name="selectedOrLoading" value="true" />
-  </component>
-  <component name="QodanaReportsService">
-    <option name="descriptions">
-      <ReportDescription localRun="true" path="C:\Users\Administrator\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="66bb0b1c-a364-453e-9723-38ce9309d041" reportId="steel_price/qodana/2025-03-12" />
-    </option>
-  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\develop\PycharmProjects\steel_price\data" />
@@ -100,7 +83,7 @@
       <recent name="D:\LenovoSoftstore\develop\steel_price_visualization_project\steel_price_visualization_project" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.visualization (1)">
+  <component name="RunManager" selected="Python.steel_price_spider (2)">
     <configuration name="pipelines" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="steel_price_visualization_project" />
       <option name="ENV_FILES" value="" />
@@ -213,8 +196,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.visualization (1)" />
         <item itemvalue="Python.steel_price_spider (2)" />
+        <item itemvalue="Python.visualization (1)" />
         <item itemvalue="Python.steel_price_spider (1)" />
         <item itemvalue="Python.pipelines" />
         <item itemvalue="Python.steel_price_spider" />
@@ -231,7 +214,6 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="" name="Changes" comment="" />
       <created>1736838011036</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
