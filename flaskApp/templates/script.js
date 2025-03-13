@@ -5,13 +5,24 @@ const myChart = echarts.init(chartContainer);
 
 // 从后端 API 获取数据
 async function fetchSteelPriceData() {
-    try {
-        const response = await fetch('/api/data');
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return [];
+    let retries = 3;
+    while (retries > 0) {
+        try {
+            const response = await fetch('/api/data');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            retries--;
+            if (retries === 0) {
+                console.error('Error fetching data:', error);
+                return [];
+            }
+            console.log(`Retrying... ${retries} attempts left`);
+            await new Promise(resolve => setTimeout(resolve, 1000)); // 等待 1 秒后重试
+        }
     }
 }
 

@@ -23,6 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "AsideOne"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/AsideOne/steel_visualization.git",
+    "accountId": "20f6f9b8-d892-4418-8422-7ff6f5f66cce"
+  }
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
   </component>
@@ -71,6 +83,23 @@
     ]
   }
 }]]></component>
+  <component name="QodanaHighlightedReportService">
+    <option name="localRunNotPublishedPersistedInfo">
+      <LocalReportPersistedInfo>
+        <option name="path" value="C:\Users\Administrator\AppData\Local\Temp\qodana_output\qodana.sarif.json" />
+        <option name="reportGuid" value="c5607ce8-eb8c-4558-a09a-0e943404a56e" />
+        <option name="reportName" value="steel_price/qodana/2025-03-13" />
+      </LocalReportPersistedInfo>
+    </option>
+  </component>
+  <component name="QodanaIsSelectedPersistenceService">
+    <option name="selectedOrLoading" value="true" />
+  </component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="C:\Users\Administrator\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="c5607ce8-eb8c-4558-a09a-0e943404a56e" reportId="steel_price/qodana/2025-03-13" />
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\develop\PycharmProjects\steel_price\data" />
@@ -83,7 +112,7 @@
       <recent name="D:\LenovoSoftstore\develop\steel_price_visualization_project\steel_price_visualization_project" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.steel_price_spider (2)">
+  <component name="RunManager" selected="Python.visualization (1)">
     <configuration name="pipelines" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="steel_price_visualization_project" />
       <option name="ENV_FILES" value="" />
@@ -196,8 +225,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.steel_price_spider (2)" />
         <item itemvalue="Python.visualization (1)" />
+        <item itemvalue="Python.steel_price_spider (2)" />
         <item itemvalue="Python.steel_price_spider (1)" />
         <item itemvalue="Python.pipelines" />
         <item itemvalue="Python.steel_price_spider" />
