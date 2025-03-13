@@ -1,33 +1,55 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>废钢价格可视化展示平台</title>
+    <title>废钢价格信息</title>
     <!-- 引入 ECharts 库 -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
-    <!-- 引入自定义的 CSS 文件 -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js"></script>
 </head>
 
 <body>
-    <!-- 页面头部 -->
-    <header>
-        <h1>废钢价格可视化展示平台</h1>
-    </header>
-    <!-- 主要内容区域 -->
-    <main>
-        <!-- 图表容器 -->
-        <div id="chart-container"></div>
-        <!-- 移除这里对 myChart 的声明 -->
-    </main>
-    <!-- 页脚 -->
-    <footer>
-        <p>&copy; 2025 废钢价格可视化展示平台</p>
-    </footer>
-    <!-- 引入自定义的 JavaScript 文件 -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <h1>废钢价格信息</h1>
+    <!-- 为 ECharts 准备一个 DOM 容器 -->
+    <div id="steel-price-chart" style="width: 800px; height: 400px;"></div>
+
+    <script type="text/javascript">
+        // 基于准备好的 DOM，初始化 echarts 实例
+        var myChart = echarts.init(document.getElementById('steel-price-chart'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '废钢价格柱状图'
+            },
+            tooltip: {
+                formatter: function (params) {
+                    // 在 tooltip 中显示日期
+                    return '名称: ' + params.name + '<br>价格: ' + params.value + '<br>日期: ' + params.data.date;
+                }
+            },
+            xAxis: {
+                data: [
+                    {% for name in steel_names %}
+                    "{{ name }}",
+                    {% endfor %}
+                ]
+            },
+            yAxis: {},
+            series: [{
+                name: '价格',
+                type: 'bar',
+                data: [
+                    {% for i in range(steel_prices|length) %}
+                    { value: {{ steel_prices[i] }}, date: "{{ steel_dates[i] }}" },
+                    {% endfor %}
+                ]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
 </body>
 
 </html>
