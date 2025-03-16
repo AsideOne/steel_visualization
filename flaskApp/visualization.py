@@ -1,9 +1,9 @@
 from flask import Flask, render_template
+
+from data import DatabaseManager
 from flaskApp.config import Config
 from flaskApp.models import db
-from data import DatabaseManager
 from apscheduler.schedulers.background import BackgroundScheduler
-import subprocess
 from .routes import routes  # 导入 routes 蓝图
 
 visualization = Flask(__name__, static_folder='templates')
@@ -36,23 +36,3 @@ def fetch_data_for_visualization():
     result = [{'date': str(item.price_date), 'price': item.price} for item in data]
     return result
 
-def run_scrapy_spider():
-    subprocess.run(['scrapy', 'crawl', 'steel_price_spider'])
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(run_scrapy_spider, 'interval', hours=1)
-scheduler.start()
-
-if __name__ == '__main__':
-    with visualization.app_context():
-        print("创建表成功")
-        database_manager.create_database()
-
-    try:
-        print("开始运行爬虫...")
-        subprocess.run(['scrapy', 'crawl', 'steel_price_spider'])
-        print("爬虫运行完成。")
-    except subprocess.CalledProcessError as e:
-        print(f"爬虫运行出错: {e}")
-
-    visualization.run(debug=True)

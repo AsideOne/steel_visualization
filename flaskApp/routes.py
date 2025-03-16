@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template
-
-from flaskApp.models import ScrapSteelPrice
+from flask import Blueprint, render_template, jsonify
+from flaskApp.db_operations import get_all_steel_prices
+from flaskApp.models import ScrapSteelPrice, ScrapSteelSpec
 
 routes = Blueprint('routes', __name__)
 
@@ -24,13 +24,16 @@ def spatial_analysis():
 def comprehensive_analysis():
     return render_template('comprehensive_analysis.html')
 
-routes.route('/api/data')
+@routes.route('/api/data')
 def get_steel_price_data():
-    try:
-        # 查询废钢价格数据
-        data = ScrapSteelPrice.query.with_entities(ScrapSteelPrice.price_date, ScrapSteelPrice.price).all()
-        result = [{'date': str(item.price_date), 'price': item.price} for item in data]
-        return jsonify(result)
-    except Exception as e:
-        print(f"Error fetching data: {e}")
-        return jsonify([])
+    steel_prices = ScrapSteelPrice.query.join(ScrapSteelSpec).all()
+    data = {}
+    for price in steel_prices:
+        variety = price.spec.variety
+        if variety not in data:
+            data[variety] = []
+        data[variety].append({
+            'date': str(price.price_date),
+            'price': price.price
+        })
+    return jsonify(data)

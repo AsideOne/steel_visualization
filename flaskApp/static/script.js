@@ -1,81 +1,115 @@
-// flaskApp/static/script.js
-// 获取图表容器元素
-const chartContainer = document.getElementById('chart-container');
-// 初始化 ECharts 实例
-const myChart = echarts.init(chartContainer);
+// 在页面加载完成后调用初始化函数
+document.addEventListener('DOMContentLoaded', () => {
+    initTrendCharts();
+    initChart();
+});
 
-// 从后端 API 获取数据
+// 添加 fetchSteelPriceData 函数
 async function fetchSteelPriceData() {
-    let retries = 3;
-    while (retries > 0) {
-        try {
-            const response = await fetch('/api/data');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            retries--;
-            if (retries === 0) {
-                console.error('Error fetching data:', error);
-                return [];
-            }
-            console.log(`Retrying... ${retries} attempts left`);
-            await new Promise(resolve => setTimeout(resolve, 1000)); // 等待 1 秒后重试
+    try {
+        const response = await fetch('/api/data');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching steel price data:', error);
+        return [];
     }
 }
 
-// 处理数据，提取日期和价格
+// 处理数据函数
 function processData(data) {
-    const dates = data.map(item => item.date);
-    const prices = data.map(item => item.price);
+    const dates = [];
+    const prices = [];
+    for (const variety in data) {
+        data[variety].forEach(item => {
+            dates.push(item.date);
+            prices.push(item.price);
+        });
+    }
     return { dates, prices };
 }
 
-// 配置 ECharts 选项
-function configureChart(dates, prices) {
-    const option = {
+// 配置图表函数
+function configureChart(processedData) {
+    const { dates, prices } = processedData;
+    return {
         title: {
-            text: '废钢价格走势图',
-            left: 'center'
-        },
-        tooltip: {
-            trigger: 'axis'
+            text: '废钢价格趋势分析图'
         },
         xAxis: {
             type: 'category',
             data: dates
         },
         yAxis: {
-            type: 'value',
-            name: '价格（元/吨）'
+            type: 'value'
         },
-        series: [
-            {
-                name: '废钢价格',
-                type: 'line',
-                data: prices
-            }
-        ]
+        series: [{
+            data: prices,
+            type: 'line'
+        }]
     };
-    return option;
+}
+
+// 初始化趋势分析图表
+async function initTrendCharts() {
+    const data = await fetchSteelPriceData();
+    const { dates, prices } = processData(data);
+    const option = configureChart({ dates, prices });
+
+    if (option && option.title) {
+        option.title.text = '废钢价格趋势分析图'; // 修改标题
+    }
+
+    const lineChart = echarts.init(document.getElementById('line-chart'));
+    lineChart.setOption(option);
+
+    const areaChart = echarts.init(document.getElementById('area-chart'));
+    const areaOption = { ...option };
+    areaOption.title.text = '不同品种价格占比变化（面积图）';
+    areaOption.series[0].areaStyle = {};
+    areaChart.setOption(areaOption);
+
+    const kLineChart = echarts.init(document.getElementById('k-line-chart'));
+    const kLineOption = {
+        title: {
+            text: '价格波动和关键支撑位（K 线图）'
+        },
+        xAxis: {
+            type: 'category',
+            data: dates
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [
+                [20, 30, 10, 40],
+                [30, 40, 20, 50],
+                [40, 50, 30, 60],
+                [50, 60, 40, 70],
+                [60, 70, 50, 80],
+                [70, 80, 60, 90],
+                [80, 90, 70, 100]
+            ],
+            type: 'candlestick'
+        }]
+    };
+    kLineChart.setOption(kLineOption);
 }
 
 // 初始化图表
 async function initChart() {
     const data = await fetchSteelPriceData();
-    const { dates, prices } = processData(data);
-    const option = configureChart(dates, prices);
+    const processedData = processData(data);
+    const option = configureChart(processedData);
     // 使用配置项显示图表
-    myChart.setOption(option);
+    const chartContainer = document.getElementById('chart-container');
+    if (chartContainer) {
+        const myChart = echarts.init(chartContainer);
+        myChart.setOption(option);
+    } else {
+        console.error('Element with id "chart-container" not found.');
+    }
 }
-
-// 调用初始化图表函数
-initChart();
-
-// 窗口大小改变时，自适应调整图表大小
-window.addEventListener('resize', function () {
-    myChart.resize();
-});

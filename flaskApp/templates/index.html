@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>废钢价格可视化展示平台</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- 引入 echarts 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <!-- 引入自定义脚本 -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 
 <body>
@@ -22,6 +26,7 @@
     </nav>
     <main>
         <p>欢迎使用废钢价格可视化展示平台，选择上方的菜单进行数据分析。</p>
+        <div id="chart-container" style="width: 800px; height: 400px;"></div>
     </main>
     <footer>
         <p>&copy; 2025 废钢价格可视化展示平台</p>
