@@ -5,29 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>废钢价格可视化展示平台</title>
-    <!-- 引入 ECharts 库 -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
-    <!-- 引入自定义的 CSS 文件 -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
-    <!-- 页面头部 -->
     <header>
         <h1>废钢价格可视化展示平台</h1>
     </header>
-    <!-- 主要内容区域 -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('routes.trend_analysis') }}">趋势分析</a></li>
+            <li><a href="{{ url_for('routes.comparison_analysis') }}">对比分析</a></li>
+            <li><a href="{{ url_for('routes.spatial_analysis') }}">空间分析</a></li>
+            <li><a href="{{ url_for('routes.comprehensive_analysis') }}">综合分析</a></li>
+        </ul>
+    </nav>
     <main>
-        <!-- 图表容器 -->
-        <div id="chart-container"></div>
-        <!-- 移除这里对 myChart 的声明 -->
+        <p>欢迎使用废钢价格可视化展示平台，选择上方的菜单进行数据分析。</p>
     </main>
-    <!-- 页脚 -->
     <footer>
         <p>&copy; 2025 废钢价格可视化展示平台</p>
     </footer>
-    <!-- 引入自定义的 JavaScript 文件 -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
 </html>

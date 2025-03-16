@@ -27,3 +27,38 @@ profile:
 
 #Specify Qodana linter for analysis (Applied in CI/CD pipeline)
 linter: jetbrains/qodana-<linter>:latest
+
+
+checks:
+  - id: "jsx-a11y/alt-text"
+    severity: WARNING
+    scope: "**/*.jsx"
+    description: "确保图表alt属性符合可访问性标准"
+  - id: "no-unused-vars"
+    severity: ERROR
+    scope: "**/charts/*.js"
+    description: "禁止图表组件中出现未使用变量"
+
+    inspections:
+      - name: "React Hook useEffect"
+        configuration:
+          maxDepth: 3
+        filters:
+          - path: "**/pages/**"
+      - name: "Memory Leaks"
+        configuration:
+          threshold: 500KB
+        filters:
+          - path: "**/components/Chart.js"
+    security:
+      - id: "xss"
+        severity: CRITICAL
+        scope: "**/data-visualization/**"
+        parameters:
+          - "chartData"
+      - id: "sql-injection"
+        severity: HIGH
+        scope: "**/api/chart-data"
+        parameters:
+          - "region"
+          - "category"

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对比分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+    <header>
+        <h1>对比分析</h1>
+    </header>
+    <main>
+        <div id="bar-chart" style="width: 800px; height: 400px;"></div>
+        <div id="grouped-bar-chart" style="width: 800px; height: 400px;"></div>
+        <div id="radar-chart" style="width: 800px; height: 400px;"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 废钢价格可视化展示平台</p>
+    </footer>
+    <script>
+        async function initComparisonCharts() {
+            const data = await fetchSteelPriceData();
+            const { dates, prices } = processData(data);
+
+            // 柱状图
+            var barChart = echarts.init(document.getElementById('bar-chart'));
+            var barOption = {
+                title: {
+                    text: '不同地区价格对比（柱状图）'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dates
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: prices,
+                    type: 'bar'
+                }]
+            };
+            barChart.setOption(barOption);
+
+            // 分组柱状图（这里简单模拟分组数据）
+            var groupedBarChart = echarts.init(document.getElementById('grouped-bar-chart'));
+            var groupedBarOption = {
+                title: {
+                    text: '同一地区多品种价格对比（分组柱状图）'
+                },
+                legend: {
+                    data: ['品种 A', '品种 B', '品种 C']
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dates.slice(0, 3)
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '品种 A',
+                    data: prices.slice(0, 3),
+                    type: 'bar'
+                }, {
+                    name: '品种 B',
+                    data: prices.slice(3, 6),
+                    type: 'bar'
+                }, {
+                    name: '品种 C',
+                    data: prices.slice(6, 9),
+                    type: 'bar'
+                }]
+            };
+            groupedBarChart.setOption(groupedBarOption);
+
+            // 雷达图（这里简单模拟雷达图数据）
+            var radarChart = echarts.init(document.getElementById('radar-chart'));
+            var radarOption = {
+                title: {
+                    text: '综合评估不同地区价格表现（雷达图）'
+                },
+                radar: {
+                    indicator: [
+                        { name: '价格', max: Math.max(...prices) },
+                        { name: '波动', max: 100 },
+                        { name: '供应', max: 100 },
+                        { name: '需求', max: 100 }
+                    ]
+                },
+                series: [{
+                    name: '地区 A',
+                    type: 'radar',
+                    data: [
+                        {
+                            value: [prices[0], 60, 70, 90],
+                            name: '地区 A'
+                        }
+                    ]
+                }]
+            };
+            radarChart.setOption(radarOption);
+        }
+
+        initComparisonCharts();
+    </script>
+</body>
+
+</html>

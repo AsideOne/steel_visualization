@@ -1,22 +1,36 @@
-from flask import render_template, jsonify
-from flaskApp.models import SteelPrice
+from flask import Blueprint, render_template
 
-# 注意这里不再创建 Flask 应用实例，而是使用从 visualization.py 导入的实例
+from flaskApp.models import ScrapSteelPrice
 
-def api_data():
-    # 从数据库中查询所有的 SteelPrice 记录
-    data = SteelPrice.query.all()
-    # 将查询结果转换为列表，列表中的每个元素是一个字典，包含日期、价格和地区信息
-    data_list = [{'date': str(item.date), 'price': item.price, 'region': item.region} for item in data]
-    # 将数据列表转换为 JSON 格式并作为 HTTP 响应返回，适用于 API 调用
-    print(data_list)
-    print("route访问")
-    return jsonify(data_list)
+routes = Blueprint('routes', __name__)
 
+@routes.route('/')
 def index():
-    # 渲染 index2.html 模板
-    return render_template('index2.html')
+    return render_template('index.html')
 
-def data_table():
-    steel_prices = SteelPrice.query.all()
-    return render_template('data_table.html', steel_prices=steel_prices)
+@routes.route('/trend_analysis')
+def trend_analysis():
+    return render_template('trend_analysis.html')
+
+@routes.route('/comparison_analysis')
+def comparison_analysis():
+    return render_template('comparison_analysis.html')
+
+@routes.route('/spatial_analysis')
+def spatial_analysis():
+    return render_template('spatial_analysis.html')
+
+@routes.route('/comprehensive_analysis')
+def comprehensive_analysis():
+    return render_template('comprehensive_analysis.html')
+
+routes.route('/api/data')
+def get_steel_price_data():
+    try:
+        # 查询废钢价格数据
+        data = ScrapSteelPrice.query.with_entities(ScrapSteelPrice.price_date, ScrapSteelPrice.price).all()
+        result = [{'date': str(item.price_date), 'price': item.price} for item in data]
+        return jsonify(result)
+    except Exception as e:
+        print(f"Error fetching data: {e}")
+        return jsonify([])

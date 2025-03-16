@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>综合分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+    <header>
+        <h1>综合分析</h1>
+    </header>
+    <main>
+        <div id="dashboard-chart" style="width: 800px; height: 400px;"></div>
+        <div id="sankey-chart" style="width: 800px; height: 400px;"></div>
+        <div id="wordcloud-chart" style="width: 800px; height: 400px;"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 废钢价格可视化展示平台</p>
+    </footer>
+    <script>
+        async function initComprehensiveCharts() {
+            const data = await fetchSteelPriceData();
+            const { dates, prices } = processData(data);
+
+            // 仪表盘
+            var dashboardChart = echarts.init(document.getElementById('dashboard-chart'));
+            var dashboardOption = {
+                title: {
+                    text: '实时监控关键指标（仪表盘）'
+                },
+                series: [{
+                    type: 'gauge',
+                    data: [
+                        { value: prices[0], name: 'Mysteel 指数' }
+                    ]
+                }]
+            };
+            dashboardChart.setOption(dashboardOption);
+
+            // 桑基图（这里简单模拟桑基图数据）
+            var sankeyChart = echarts.init(document.getElementById('sankey-chart'));
+            var sankeyOption = {
+                title: {
+                    text: '废钢供应链成本流向分析（桑基图）'
+                },
+                series: [{
+                    type: 'sankey',
+                    data: [
+                        { name: '供应' },
+                        { name: '加工' },
+                        { name: '销售' }
+                    ],
+                    links: [
+                        { source: '供应', target: '加工', value: prices[0] },
+                        { source: '加工', target: '销售', value: prices[1] }
+                    ]
+                }]
+            };
+            sankeyChart.setOption(sankeyOption);
+
+            // 词云图（这里简单模拟词云图数据）
+            var wordcloudChart = echarts.init(document.getElementById('wordcloud-chart'));
+            var wordcloudOption = {
+                title: {
+                    text: '市场关键词热度分析（词云图）'
+                },
+                series: [{
+                    type: 'wordCloud',
+                    data: [
+                        { name: '政策', value: prices[0] },
+                        { name: '库存', value: prices[1] },
+                        { name: '需求', value: prices[2] }
+                    ]
+                }]
+            };
+            wordcloudChart.setOption(wordcloudOption);
+        }
+
+        initComprehensiveCharts();
+    </script>
+</body>
+
+</html>

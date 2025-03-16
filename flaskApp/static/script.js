@@ -1,3 +1,4 @@
+// flaskApp/static/script.js
 // 获取图表容器元素
 const chartContainer = document.getElementById('chart-container');
 // 初始化 ECharts 实例

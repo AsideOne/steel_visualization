@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>趋势分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+    <header>
+        <h1>趋势分析</h1>
+    </header>
+    <main>
+        <div id="line-chart" style="width: 800px; height: 400px;"></div>
+        <div id="area-chart" style="width: 800px; height: 400px;"></div>
+        <div id="k-line-chart" style="width: 800px; height: 400px;"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 废钢价格可视化展示平台</p>
+    </footer>
+    <script>
+        async function initTrendCharts() {
+            const data = await fetchSteelPriceData();
+            const { dates, prices } = processData(data);
+
+            // 折线图
+            var lineChart = echarts.init(document.getElementById('line-chart'));
+            var lineOption = {
+                title: {
+                    text: '价格随时间的变化趋势（折线图）'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dates
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: prices,
+                    type: 'line'
+                }]
+            };
+            lineChart.setOption(lineOption);
+
+            // 面积图
+            var areaChart = echarts.init(document.getElementById('area-chart'));
+            var areaOption = {
+                title: {
+                    text: '不同品种价格占比变化（面积图）'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dates
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: prices,
+                    type: 'line',
+                    areaStyle: {}
+                }]
+            };
+            areaChart.setOption(areaOption);
+
+            // K 线图（这里假设数据简单处理为 K 线数据格式）
+            var kLineData = prices.map(price => [price, price, price, price]);
+            var kLineChart = echarts.init(document.getElementById('k-line-chart'));
+            var kLineOption = {
+                title: {
+                    text: '价格波动和关键支撑位（K 线图）'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dates
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: kLineData,
+                    type: 'candlestick'
+                }]
+            };
+            kLineChart.setOption(kLineOption);
+        }
+
+        initTrendCharts();
+    </script>
+</body>
+
+</html>

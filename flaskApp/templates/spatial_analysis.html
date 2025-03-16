@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>空间分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/map/js/china.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+    <header>
+        <h1>空间分析</h1>
+    </header>
+    <main>
+        <div id="heatmap-chart" style="width: 800px; height: 400px;"></div>
+        <div id="map-drilldown-chart" style="width: 800px; height: 400px;"></div>
+        <div id="flow-chart" style="width: 800px; height: 400px;"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 废钢价格可视化展示平台</p>
+    </footer>
+    <script>
+        async function initSpatialCharts() {
+            const data = await fetchSteelPriceData();
+            const { dates, prices } = processData(data);
+
+            // 热力图（这里简单模拟经纬度数据）
+            var heatmapChart = echarts.init(document.getElementById('heatmap-chart'));
+            var heatmapData = [
+                [116.46, 39.92, prices[0]],
+                [121.48, 31.22, prices[1]],
+                [106.54, 29.59, prices[2]]
+            ];
+            var heatmapOption = {
+                title: {
+                    text: '全国价格分布可视化（热力图）'
+                },
+                visualMap: {
+                    min: 0,
+                    max: Math.max(...prices)
+                },
+                geo: {
+                    map: 'china'
+                },
+                series: [{
+                    type: 'heatmap',
+                    coordinateSystem: 'geo',
+                    data: heatmapData
+                }]
+            };
+            heatmapChart.setOption(heatmapOption);
+
+            // 地图钻取
+            var mapDrilldownChart = echarts.init(document.getElementById('map-drilldown-chart'));
+            var mapDrilldownOption = {
+                title: {
+                    text: '逐层查看省→市→区的价格详情（地图钻取）'
+                },
+                geo: {
+                    map: 'china'
+                },
+                series: [{
+                    type: 'map',
+                    map: 'china'
+                }]
+            };
+            mapDrilldownChart.setOption(mapDrilldownOption);
+
+            // 流向图（这里简单模拟流向数据）
+            var flowChart = echarts.init(document.getElementById('flow-chart'));
+            var flowOption = {
+                title: {
+                    text: '废钢交易流向可视化（流向图）'
+                },
+                series: [{
+                    type: 'lines',
+                    data: [
+                        {
+                            coords: [
+                                [116.46, 39.92],
+                                [121.48, 31.22]
+                            ]
+                        }
+                    ]
+                }]
+            };
+            flowChart.setOption(flowOption);
+        }
+
+        initSpatialCharts();
+    </script>
+</body>
+
+</html>

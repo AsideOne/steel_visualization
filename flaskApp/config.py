@@ -1,9 +1,4 @@
-import os
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-db = SQLAlchemy()
+# flaskApp/config.py
 
 class Config:
     # MySQL 数据库连接配置
@@ -15,7 +10,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
-    def create_database():
+    def create_database(app, db):
         """
         创建数据库的方法
         """

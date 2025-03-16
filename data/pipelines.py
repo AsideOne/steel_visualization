@@ -1,34 +1,45 @@
-from scrapy.exceptions import DropItem
-from flaskApp.models import db, SteelPrice
-from flaskApp import app
-from datetime import datetime
+from flaskApp.models import db, ScrapSteelPrice, Region, ScrapSteelSpec
+from flask import Flask
+from datetime import date
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:administrator@localhost/steel_price_db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
 
 class SteelPricePipeline:
-    def open_spider(self, spider):
-        # 在爬虫开始时，确保数据库表已经创建
-        with app.app_context():
-            db.create_all()
-
-    def close_spider(self, spider):
-        pass
-
     def process_item(self, item, spider):
-        if not all(item.values()):
-            raise DropItem("Missing data in %s" % item)
-        try:
-            with app.app_context():
-                today = datetime.now().date()  # 获取当前日期
-                # 检查数据库中是否已经存在当天的相同数据
-                existing_data = SteelPrice.query.filter_by(name=item['name'], date=today).first()
-                if not existing_data:
-                    # 创建 SteelPrice 实例并添加到数据库会话中
-                    steel_price = SteelPrice(name=item['name'], price=item['price'], date=today)
-                    db.session.add(steel_price)
-                # 提交会话以保存数据到数据库
+        with app.app_context():
+            # 处理地区信息
+            region_name = item['region_name']
+            region = Region.query.filter_by(name=region_name).first()
+            if not region:
+                region = Region(name=region_name)
+                db.session.add(region)
                 db.session.commit()
-        except Exception as e:
-            print(f"Error inserting item into database: {e}")
-            # 发生错误时回滚会话
-            db.session.rollback()
-            raise DropItem(f"Failed to insert item into database: {e}")
+
+            # 处理品种规格信息
+            variety = item['variety']
+            specification = item['specification']
+            spec = ScrapSteelSpec.query.filter_by(variety=variety, specification=specification).first()
+            if not spec:
+                spec = ScrapSteelSpec(variety=variety, specification=specification)
+                db.session.add(spec)
+                db.session.commit()
+
+            # 生成废钢 ID
+            scrap_steel_id = f"{region.id}-{spec.id}-{item['price_date']}"
+
+            # 检查数据是否已存在
+            existing_data = ScrapSteelPrice.query.filter_by(scrap_steel_id=scrap_steel_id).first()
+            if not existing_data:
+                scrap_steel_price = ScrapSteelPrice(
+                    scrap_steel_id=scrap_steel_id,
+                    spec_id=spec.id,
+                    region_id=region.id,
+                    price=item['price'],
+                    price_date=item['price_date']
+                )
+                db.session.add(scrap_steel_price)
+                db.session.commit()
         return item
